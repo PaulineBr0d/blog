@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Piks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Voltaire&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="/js/script.js" defer></script>
+    <script src="/js/form.js" defer></script>
+        <script src="/js/app.js" defer></script>
+     <script src="/js/checkAdmin.js" defer></script>
+</head>
+<body data-page="listing">
+    <header>
+    <div class="head-icon">
+    <i class="fa-solid fa-house" id="home"></i>
+    <div class="title" >
+        <h1>Magic Piks</h1>
+        <h4>Mon blog photos & randos</h4>
+        </div>
+        <i class="fa-solid fa-backward-step" id="back"></i>
+      </div> 
+   <nav>
+        <img class="img-navbar" id="img-logo" src="assets/Design_plat_Appareil_photo_vert.svg.png" alt="logo" />
+        <img class="img-navbar" id="img-illustration" src="assets/4328351-removebg-preview.png" alt="illustration" />
+      </nav>  
+    </header>
+    <main class="fond"> 
+    <form id="randoForm">
+    <div class="form-grid">
+    <div>
+      <label for="title">Titre</label>
+      <input type="text" id="title" required>
+
+      <label for="date">Date</label>
+      <input type="date" id="date" required>
+
+      <label for="location">Lieu</label>
+      <input type="text" id="location" required>
+
+      <label for="difficulty">Difficulté</label>
+      <select id="difficulty">
+        <option value="Facile">Facile</option>
+        <option value="Moyen">Moyen</option>
+        <option value="Difficile">Difficile</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="interest">Intérêt</label>
+      <select id="interest">
+        <option value="Faible">Faible</option>
+        <option value="Moyen">Moyen</option>
+        <option value="Fort">Fort</option>
+      </select>
+
+      <label for="tags">Tags</label>
+      <input type="text" id="tags">
+
+      <label for="url">Lien</label>
+      <input type="url" id="url">
+
+      <label for="imageUpload">Images</label>
+      <input type="file" id="imageUpload" multiple accept="image/*">
+    </div>
+  </div>
+
+  <label for="description">Description</label>
+  <textarea id="description" rows="4" required></textarea>
+
+  <div id="imagePreview"></div>
+  <p id="errorMessage"></p>
+  <p id="loadingMessage"></p>
+
+  <button type="submit">Ajouter la randonnée</button>
+  <button id="logoutBtn">Se déconnecter</button>
+</form>
+    </main> 
+     <footer>
+      <div>Design & Photos by Pauline Briaud</div>
+      <div><p>Illustrations by <a href="https://www.freepik.com" target="_blank" rel="noopener">Freepik</a> & TiboF, via 
+      <a href="https://commons.wikimedia.org/wiki/File:Design_plat_Appareil_photo_vert.svg" target="_blank" rel="noopener">Wikimedia Commons</a>. 
+      Licence <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.fr" target="_blank" rel="license noopener">CC BY-SA 3.0</a>.
+    </p></div>
+    </footer>
+</body>
+</html>

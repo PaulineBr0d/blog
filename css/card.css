@@ -1,0 +1,117 @@
+.container-filter {
+    display: flex;
+    flex-direction: column;   
+    gap: 20px;
+    max-height: 100%;
+    overflow-y: auto;
+   }  
+.container-filter::-webkit-scrollbar {
+    width: 8px;
+}
+
+.container-filter::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.container-filter::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+.card {
+    display: flex;
+    background-color: #DFDFDF;
+    border-radius: 5px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    align-items: stretch;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.img-card {
+    flex: 1;
+    max-width: clamp(200px, 25%, 300px);
+}
+
+.img-card  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.card-content {
+    flex: 3;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* Titre principal */
+.card-title a {
+  all: unset;
+  display: inline;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-title {
+  flex: 1;
+  min-width: 150px;
+}
+
+.card-title h2 {
+  font-size: clamp(1rem, 2vw, 1.8rem);
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+.description p {
+    flex: 1 1 100%;
+    font-size: clamp(1rem, 1.5vw, 1.8rem);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    gap: clamp(12px, 2vw, 24px);   
+}
+
+.wrap-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.menu-card {
+    display: block;
+    padding: 8px;
+    line-height: 1.3;
+    font-size: clamp(0.8rem, 1.2vw, 1.6rem);
+    background-color: #575454;
+    color: #B4B3B3;
+    font-weight: normal;
+    width: clamp(125px, 12vw, 280px);  
+  
+}
+
+
+.menu-card .icon::before {
+    font-size: clamp(0.8rem, 1.2vw, 1.8rem);
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-right: 8px;
+    padding: 4px 4px;
+    background-color: #444;
+    color: #B4B3B3;
+}
+
+/*.menu-location .icon::before { content: "\f124"; }
+.menu-difficult .icon::before { content: "\f201"; }
+.menu-heart .icon::before { content: "\f08a"; }
+.menu-tag .icon::before { content: "\f02c"; } */   
+

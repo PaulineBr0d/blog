@@ -1,0 +1,53 @@
+.gallery{
+    grid-area: gallery;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}  
+
+h2 a {
+  color: inherit; 
+  text-decoration: none;
+}
+
+details{
+    display: flex;
+    color: white;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    flex-grow: 1;
+    ::marker{
+        content: ""
+    }
+
+        img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index:-1;
+            transition: filter 0.5s ease;
+            filter: brightness(0.5);
+        }
+   }
+
+details {
+    &[open] {
+        width: 30%;
+        img{
+            filter: brightness(1);    
+            }
+        }
+}
+   
+.details-content{
+        min-width: 200px;       
+        background-color: rgba(0,0,0,0.6);
+        color: white;
+        padding: 5px;
+        opacity: 0.5; 
+        font-style: italic;
+}

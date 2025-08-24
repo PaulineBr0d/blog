@@ -1,0 +1,68 @@
+header{
+    grid-area: header;
+    background:#D9D9D9;
+    position: sticky;
+    z-index: 10 ;
+    top: 0;
+ 
+    .title {
+        font-family: 'Voltaire', sans-serif;
+        color:#00B18A; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 0;
+        letter-spacing: 3px;
+        }
+
+    .title > h4 {
+        font-weight: 400;  
+        font-size: clamp(20px, 3vh, 35px);
+
+        text-align: center;
+        }
+
+    .title > h1 {
+        font-weight: bold;
+        font-style: italic;
+         font-size: clamp(40px, 6vh, 65px);
+           filter: drop-shadow(10px 10px 4px #B4B3B3);
+        } 
+}
+
+nav{
+    grid-area: nav;
+    display: flex;
+    
+    .img-navbar {
+        display: flex;
+        position: absolute; 
+        z-index: 1000 ;
+        transform: translateY(-75%);
+        }
+
+    #img-logo{
+        width: 6%;
+        left:2%;
+        }
+
+    #img-illustration{
+        width: 7%;
+        right:2%;
+        } 
+  } 
+
+.head-icon{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: clamp(15px, 2vw, 35px);
+  color:#575454;
+  padding: 0 16px;
+}
+
+
+i:hover {
+  transform: scale(1.2);
+  color: #007f66;
+}

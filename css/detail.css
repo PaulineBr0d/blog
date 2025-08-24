@@ -1,0 +1,154 @@
+.detail {
+   display: flex;
+   justify-content: center;
+    /*align-items: center;
+    flex-direction: column;  
+    max-height: 100%; */
+    width:100%;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.left-card {
+    flex: 1 1 500px;
+    background-color: #DFDFDF;
+    border-radius: 8px;
+    padding: 40px;
+    width: 100%;
+}
+
+.right-content {
+  flex: 2 1 500px;
+  padding: 2rem;
+  
+}
+
+.detail::-webkit-scrollbar {
+    width: 8px;
+}
+
+.detail::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.detail::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap:20px;
+    flex-wrap: wrap;
+ }
+.main-info{
+    display: flex;
+    width: 100%;
+    gap:20px;
+}
+
+.sub-title{
+    display: flex;
+    gap: 50px;
+}
+
+.sub-title h2{
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    margin: 0;  
+}
+
+.sub-title i{
+    font-size: clamp(15px, 2vw, 30px);
+    color:#575454; 
+}
+
+a:hover {
+    transform: scale(1.5);
+    color: #007f66;
+}
+
+
+.text{
+    font-size: clamp(0.8rem, 1.2vw, 1.8rem);
+    line-height: 1.6;
+    color: #444;
+    text-align: justify;
+    word-break: break-word; 
+}
+
+.detail-menu{
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+ 
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /*height: 500px
+    padding: 40px 0;*/
+} 
+
+.wrapper {
+    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.inner {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+}
+
+.img-detail {
+    flex: 0 0 100%;
+}
+
+.img-detail > img {
+    display: block;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+
+.map {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.map > button {
+  background: #00B18A;
+  border: none;
+  cursor: pointer;
+  margin: 0 0.25em;
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.map > button:hover {
+  background-color: #007f66;
+  transform: scale(1.2);
+}
+
+.highlight-tag {
+  font-weight: bold;
+  color: #00B18A;
+  background-color: #e0f2e0;
+  padding: 2px 4px;
+  border-radius: 4px;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Piks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Voltaire&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="/js/script.js" defer></script>
+    <script src="/js/form.js" defer></script>
+    <script src="/js/app.js" defer></script>
+</head>
+<body style="display: inline-block">
+   <form id="loginForm">
+    <label for="email">Email :</label>
+    <input type="email" id="email" required>
+
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" required>
+
+    <button type="submit">Se connecter</button>
+    <p id="loginError" style="color: red;"></p>
+  </form>
+  <script src="js/login.js"></script>
+  <script>
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    await fetch("/api/logout", { method: "POST" });
+    window.location.href = "login.html";
+  });
+</script>
+
+</body>
+</html>
