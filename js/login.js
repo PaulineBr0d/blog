@@ -3,7 +3,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
 
-  const res = await fetch("https://mon-app-node-c73ee22982be.herokuapp.com/api/auth/login", {
+  const res = await fetch("https://magicpiks-75022637d756.herokuapp.com/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })

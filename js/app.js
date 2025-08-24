@@ -1,4 +1,4 @@
-fetch('https://mon-app-node-c73ee22982be.herokuapp.com/api/data') 
+fetch('https://magicpiks-75022637d756.herokuapp.com/api/data') 
   .then(res => res.json())
   .then(data => {
     const page = document.body.getAttribute('data-page');
@@ -114,7 +114,7 @@ function loadDetail() {
   main.innerHTML = '';
   const id = new URLSearchParams(window.location.search).get('id');
 
-  fetch(`https://mon-app-node-c73ee22982be.herokuapp.com/api/data/${id}`) 
+  fetch(`https://magicpiks-75022637d756.herokuapp.com/api/data/${id}`) 
     .then(res => {
       if (!res.ok) throw new Error('Rando introuvable 😕');
       return res.json();
