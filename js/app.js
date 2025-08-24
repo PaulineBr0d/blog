@@ -114,7 +114,7 @@ function loadDetail() {
   main.innerHTML = '';
   const id = new URLSearchParams(window.location.search).get('id');
 
-  fetch(`/api/data/${id}`) 
+  fetch(`https://mon-app-node-c73ee22982be.herokuapp.com/api/data/${id}`) 
     .then(res => {
       if (!res.ok) throw new Error('Rando introuvable 😕');
       return res.json();

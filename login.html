@@ -9,9 +9,9 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="/js/script.js" defer></script>
-    <script src="/js/form.js" defer></script>
-    <script src="/js/app.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/form.js" defer></script>
+    <script src="js/app.js" defer></script>
 </head>
 <body style="display: inline-block">
    <form id="loginForm">
@@ -27,7 +27,7 @@
   <script src="js/login.js"></script>
   <script>
   document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await fetch("/api/logout", { method: "POST" });
+    await fetch("https://mon-app-node-c73ee22982be.herokuapp.com/api/logout", { method: "POST" });
     window.location.href = "login.html";
   });
 </script>
