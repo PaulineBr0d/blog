@@ -39,7 +39,7 @@ if (confirmBtn) {
     if (selections["Intérêt"]) params.set("interest", selections["Intérêt"]);
     if (selections["Tag"]) params.set("tag", selections["Tag"]);
 
-    window.location.href = `/listing.html?${params.toString()}`;
+    window.location.href = `/blog/listing.html?${params.toString()}`;
      });
   }
 })
