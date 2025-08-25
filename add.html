@@ -87,5 +87,11 @@
       Licence <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.fr" target="_blank" rel="license noopener">CC BY-SA 3.0</a>.
     </p></div>
     </footer>
+      <script>
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    await fetch("/api/logout", { method: "POST" });
+    window.location.href = "login.html";
+  });
+</script>
 </body>
 </html>

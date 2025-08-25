@@ -26,13 +26,7 @@
     <button type="submit">Se connecter</button>
     <p id="loginError" style="color: red;"></p>
   </form>
- 
-  <script>
-  document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await fetch("https://magicpiks-75022637d756.herokuapp.com/api/logout", { method: "POST" });
-    window.location.href = "login.html";
-  });
-</script>
+
 
 </body>
 </html>
