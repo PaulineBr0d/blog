@@ -199,7 +199,7 @@ function initFilters() {
       else if (category === 'Intérêt') params.set('interest', value);
       else if (category === 'Tag') params.set('tag', value);
 
-      window.location.href = `/listing.html?${params.toString()}`;
+      window.location.href = `listing.html?${params.toString()}`;
     });
   });
 }

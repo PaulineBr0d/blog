@@ -2,7 +2,9 @@
   .gallery{
      flex-direction: column;
 }  
- 
+  .sidebar{
+    letter-spacing: 0;
+  }
 details {
     pointer-events: none;
     user-select: none;
@@ -57,12 +59,16 @@ details:not([open]) {
   .text{
       margin: 10px 0;
   }
-
+  .main-info{
+    display: flex;
+    flex-direction: column;
+  }
   .detail-menu {
     width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 5px;
   }
 
   .menu-card{
@@ -80,3 +86,4 @@ details:not([open]) {
   }
 
 }
+
