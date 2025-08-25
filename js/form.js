@@ -155,7 +155,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       const res = await fetch("https://magicpiks-75022637d756.herokuapp.com/api/data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(rando)
+        body: JSON.stringify(rando),
+        credentials: "include"
       });
 
       if (res.ok) {
