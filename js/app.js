@@ -215,7 +215,6 @@ function loadDetail() {
           </div> 
         `;
 
-        // Remplacement propre du squelette
         const skeleton = main.querySelector('.loading-skeleton');
         if (skeleton) {
           skeleton.replaceWith(detail);
