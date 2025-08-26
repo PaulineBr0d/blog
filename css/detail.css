@@ -116,9 +116,9 @@ a:hover {
 
 .img-detail > img {
     display: block;
-    width: 100%;
-    aspect-ratio: 4 / 3; 
-    object-fit: cover; 
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 
