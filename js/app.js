@@ -128,10 +128,9 @@ function loadListingFiltered(data) {
 // PAGE DETAIL : Affiche les infos d’une rando par ID
 function loadDetail() {
   const main = document.querySelector('main');
-  main.innerHTML = '';
   const id = new URLSearchParams(window.location.search).get('id');
 
-  fetch(`https://magicpiks.onrender.com/api/data/${id}`) 
+  fetch(`https://magicpiks.onrender.com/api/data/${id}`)
     .then(res => {
       if (!res.ok) throw new Error('Rando introuvable 😕');
       return res.json();
@@ -143,89 +142,90 @@ function loadDetail() {
       const year = String(rawDate.getFullYear());
       const formattedDate = `${day}/${month}/${year}`;
 
+      // Charger les images et calculer leur aspect ratio
       const imageLoadPromises = rando.images.map(img => {
-      return new Promise(resolve => {
-        const tempImg = new Image();
-        tempImg.onload = () => {
-          const ratio = tempImg.width / tempImg.height;
-          resolve({
-            url: img.url,
-            alt: img.public_id,
-            aspectRatio: ratio
-          });
-        };
-        tempImg.src = img.url;
+        return new Promise(resolve => {
+          const tempImg = new Image();
+          tempImg.onload = () => {
+            const ratio = tempImg.width / tempImg.height;
+            resolve({
+              url: img.url,
+              alt: img.public_id,
+              aspectRatio: ratio
+            });
+          };
+          tempImg.src = img.url;
+        });
       });
-    });
 
-    return Promise.all(imageLoadPromises).then(images => {
-      const imagesHTML = images.map(image => {
-        return `
-          <div class="img-detail">
-            <img 
-              src="${image.url}" 
-              alt="${image.alt}" 
-              style="aspect-ratio: ${image.aspectRatio}; object-fit: contain;" />
-          </div>
-        `;
-      }).join('');
-      /*const imagesHTML = rando.images
-      .map(img => `<div class="img-detail"><img src="${img.url}" alt="${img.public_id}"></div>`)
-      .join('');*/
-      const linkHTML = rando.url
-        ? `<a href="${rando.url}" target="_blank"><i class="fa-solid fa-link"></i></a>`
-        : `<i class="fa-solid fa-link-slash"></i>`;
-      const highlightedDescription = highlightTagsInDescription(rando.description, rando.tags);
-
-      const detail = document.createElement('div');
-      detail.className = 'detail';
-      detail.innerHTML = `
-      <div class="left-card">
-        <div class="content">
-        <div class="sub-title">
-          <h2>${rando.title}</h2>
-          <span>${linkHTML}</span>
+      // Une fois toutes les images chargées
+      return Promise.all(imageLoadPromises).then(images => {
+        const imagesHTML = images.map(image => {
+          return `
+            <div class="img-detail">
+              <img 
+                src="${image.url}" 
+                alt="${image.alt}" 
+                style="aspect-ratio: ${image.aspectRatio}; object-fit: contain;" />
             </div>
-        
-          <div class="main-info">
-          <div class="detail-menu">
-          <h4 class="menu-card menu-date"><span class="icon">${formattedDate}</span></h4>
-            <h4 class="menu-card menu-location"><span class="icon">${rando.location}</span></h4>
-            <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</span></h4>
-            <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</span></h4>
-         
-        </div>  
-           <div class="text">
-              <p>${highlightedDescription}</p>
+          `;
+        }).join('');
+
+        const linkHTML = rando.url
+          ? `<a href="${rando.url}" target="_blank"><i class="fa-solid fa-link"></i></a>`
+          : `<i class="fa-solid fa-link-slash"></i>`;
+
+        const highlightedDescription = highlightTagsInDescription(rando.description, rando.tags);
+
+        const detail = document.createElement('div');
+        detail.className = 'detail';
+        detail.innerHTML = `
+          <div class="left-card">
+            <div class="content">
+              <div class="sub-title">
+                <h2>${rando.title}</h2>
+                <span>${linkHTML}</span>
+              </div>
+              <div class="main-info">
+                <div class="detail-menu">
+                  <h4 class="menu-card menu-date"><span class="icon">${formattedDate}</span></h4>
+                  <h4 class="menu-card menu-location"><span class="icon">${rando.location}</span></h4>
+                  <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</span></h4>
+                  <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</span></h4>
+                </div>  
+                <div class="text">
+                  <p>${highlightedDescription}</p>
                 </div>
-            </div>
-             </div> 
-          </div> 
-          <div class="right-content">
-        <div class="map">
-          <button id="first"></button>
-          <button id="next"></button>
-          <button id="last"></button>
-        </div>
-        <div class="center">
-          <div class="wrapper">
-            <div class="inner">
-              ${imagesHTML}
+              </div>
             </div> 
           </div> 
-        </div>
-        </div> 
-      `;
+          <div class="right-content">
+            <div class="map">
+              <button id="first"></button>
+              <button id="next"></button>
+              <button id="last"></button>
+            </div>
+            <div class="center">
+              <div class="wrapper">
+                <div class="inner">
+                  ${imagesHTML}
+                </div> 
+              </div> 
+            </div>
+          </div> 
+        `;
 
-      const skeleton = main.querySelector('.loading-skeleton');
+        // Remplacement propre du squelette
+        const skeleton = main.querySelector('.loading-skeleton');
         if (skeleton) {
           skeleton.replaceWith(detail);
         } else {
-      main.appendChild(detail);
-    }
-      const imageCount = detail.querySelectorAll('.img-detail').length;
-      initSlider(imageCount);
-     });
+          main.appendChild(detail);
+        }
+
+        const imageCount = detail.querySelectorAll('.img-detail').length;
+        initSlider(imageCount);
+      });
     })
     .catch(err => {
       main.innerHTML = `<p class="error">Erreur lors du chargement de la randonnée 😕</p>`;
