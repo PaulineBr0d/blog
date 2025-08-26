@@ -89,7 +89,7 @@
     </footer>
       <script>
   document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await fetch("https://magicpiks-75022637d756.herokuapp.com/api/logout", { method: "POST",  credentials: "include" });
+    await fetch("https://magicpiks-75022637d756.herokuapp.com/api/auth/logout", { method: "POST",  credentials: "include" });
     window.location.href = "login.html";
   });
 </script>
