@@ -1,4 +1,4 @@
-fetch('https://magicpiks-75022637d756.herokuapp.com/api/auth/check', {
+fetch('https://magicpiks.onrender.com/api/auth/check', {
   method: 'GET',
   credentials: 'include'  
 })
