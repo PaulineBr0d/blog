@@ -143,33 +143,32 @@ function loadDetail() {
       const year = String(rawDate.getFullYear());
       const formattedDate = `${day}/${month}/${year}`;
 
-
-  const imageLoadPromises = rando.images.map(img => {
-  return new Promise(resolve => {
-    const tempImg = new Image();
-    tempImg.onload = () => {
-      const ratio = tempImg.width / tempImg.height;
-      resolve({
-        url: img.url,
-        alt: img.public_id,
-        aspectRatio: ratio
+      const imageLoadPromises = rando.images.map(img => {
+      return new Promise(resolve => {
+        const tempImg = new Image();
+        tempImg.onload = () => {
+          const ratio = tempImg.width / tempImg.height;
+          resolve({
+            url: img.url,
+            alt: img.public_id,
+            aspectRatio: ratio
+          });
+        };
+        tempImg.src = img.url;
       });
-    };
-    tempImg.src = img.url;
-  });
-});
+    });
 
-Promise.all(imageLoadPromises).then(images => {
-  const imagesHTML = images.map(image => {
-    return `
-      <div class="img-detail">
-        <img 
-          src="${image.url}" 
-          alt="${image.alt}" 
-          style="aspect-ratio: ${image.aspectRatio}; object-fit: contain;" />
-      </div>
-    `;
-  }).join('');
+    return Promise.all(imageLoadPromises).then(images => {
+      const imagesHTML = images.map(image => {
+        return `
+          <div class="img-detail">
+            <img 
+              src="${image.url}" 
+              alt="${image.alt}" 
+              style="aspect-ratio: ${image.aspectRatio}; object-fit: contain;" />
+          </div>
+        `;
+      }).join('');
       /*const imagesHTML = rando.images
       .map(img => `<div class="img-detail"><img src="${img.url}" alt="${img.public_id}"></div>`)
       .join('');*/
@@ -226,6 +225,7 @@ Promise.all(imageLoadPromises).then(images => {
     }
       const imageCount = detail.querySelectorAll('.img-detail').length;
       initSlider(imageCount);
+     });
     })
     .catch(err => {
       main.innerHTML = `<p class="error">Erreur lors du chargement de la randonnée 😕</p>`;
