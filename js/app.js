@@ -1,3 +1,9 @@
+//ajout d'un fonction pour limiter le chargment des images
+function optimizeCloudinaryUrl(url, options = "w_1200,q_auto,f_auto") {
+  if (!url) return "";
+  return url.replace("/upload/", `/upload/${options}/`);
+}
+
 fetch('https://magicpiks.onrender.com/api/data') 
   .then(res => res.json())
   .then(data => {
@@ -51,7 +57,13 @@ function loadIndex(data) {
     const bloc = document.createElement('div');
     bloc.innerHTML = `
   <details ${isSecond ? 'open' : ''} name="paysages">
-    <summary><img src="${rando.images[0]?.url}" alt="${rando.title}"></summary>
+    <summary><img  src="${optimizeCloudinaryUrl(rando.images[0]?.url)}"  
+          alt="${rando.title}"  
+          width="1200"
+          height="600"
+          fetchpriority="high"
+          decoding="async">
+    </summary>
     <div class="details-content">
       <h2><a href="detail.html?id=${rando._id}">${rando.title}</a></h2>
     </div>
@@ -90,7 +102,12 @@ function loadListingFiltered(data) {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-      <div class="img-card">   <img src="${rando.images[0]?.url || 'fallback.jpg'}" alt="${rando.title}"></div>
+      <div class="img-card">   <img src="${optimizeCloudinaryUrl(rando.images[0]?.url) || 'fallback.jpg'}" 
+          alt="${rando.title}" 
+          width="1200"
+          height="600"
+          fetchpriority="high"
+          decoding="async"></div>
       <div class="card-content">
       <div class="card-title"><a href="detail.html?id=${rando._id}"><h2>${rando.title}</h2></a></div>
       <div class="description">
