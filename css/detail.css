@@ -114,13 +114,15 @@ a:hover {
     flex: 0 0 100%;
 }
 
-.img-detail > img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
+.img-detail img {
+  display: block;
+  max-height: 500px;       
+  max-width: 100%;         
+  width: auto;            
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
 }
-
 
 .map {
     display: flex;
