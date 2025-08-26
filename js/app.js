@@ -191,7 +191,12 @@ function loadDetail() {
         </div> 
       `;
 
+      const skeleton = main.querySelector('.loading-skeleton');
+        if (skeleton) {
+          skeleton.replaceWith(detail);
+        } else {
       main.appendChild(detail);
+    }
       const imageCount = detail.querySelectorAll('.img-detail').length;
       initSlider(imageCount);
     })

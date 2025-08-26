@@ -1,3 +1,7 @@
+.loading-skeleton {
+  min-height: 600px;
+}
+
 .detail {
    display: flex;
    justify-content: center;
@@ -112,10 +116,9 @@ a:hover {
 
 .img-detail > img {
     display: block;
-    max-height: 75%;
-    max-width: 100%;
-    object-fit: contain;
-    margin: 0 auto;
+    width: 100%;
+    aspect-ratio: 4 / 3; 
+    object-fit: cover; 
 }
 
 
