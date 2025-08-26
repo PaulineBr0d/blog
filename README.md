@@ -1,4 +1,4 @@
-# Projet git add .– Frontend
+# Projet Blog Photos & Randos – Frontend
 
 ## Description
 
