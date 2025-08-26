@@ -29,10 +29,10 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
-.card:hover {
+/*.card:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
-}
+}*/
 
 .img-card {
     flex: 1;

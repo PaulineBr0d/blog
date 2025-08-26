@@ -68,7 +68,7 @@ details:not([open]) {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 3px;
   }
 
   .menu-card{
