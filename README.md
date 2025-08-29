@@ -17,6 +17,6 @@ Design : [Figma](https://www.figma.com/design/GC5v95K5CKXshqJNZi0CTG/projet_form
   - Infos complètes
   - Galerie d’images (slider)
 - Menus dynamiques basés sur les données de l’API
-- Connexion admin + bouton logout
+- Pages Login et Add pour ajouter une randonnée si admin du site (+ bouton logout)
 
 ---
