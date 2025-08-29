@@ -67,39 +67,52 @@ document.addEventListener('DOMContentLoaded', () => {
 function initSlider(imageCount) {
   const slides = document.querySelector(".inner");
   const total = imageCount;
- 
   let currentIndex = 0;
 
   const firstBtn = document.getElementById("first");
+  const prevBtn = document.getElementById("prev");
   const nextBtn = document.getElementById("next");
   const lastBtn = document.getElementById("last");
 
- 
+  function updateSlider() {
+    if (!slides) return;
+    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    updateButtons();
+  }
+
+  function updateButtons() {
+    if (firstBtn) firstBtn.disabled = currentIndex === 0;
+    if (prevBtn) prevBtn.disabled = currentIndex === 0;
+    if (nextBtn) nextBtn.disabled = currentIndex === total - 1;
+    if (lastBtn) lastBtn.disabled = currentIndex === total - 1;
+  }
 
   if (slides && total > 0) {
-    if (firstBtn) {
-      firstBtn.addEventListener("click", () => {
-        currentIndex = 0;
-        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-      });
-    }
+    firstBtn?.addEventListener("click", () => {
+      currentIndex = 0;
+      updateSlider();
+    });
 
-    if (nextBtn) {
-      nextBtn.addEventListener("click", () => {
-        if (currentIndex < total - 1) {
-         currentIndex++;
-        }  
-        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-      });
-    }
+    prevBtn?.addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
+    });
 
-    if (lastBtn) {
-      lastBtn.addEventListener("click", () => {
-        currentIndex = total - 1;
-        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-  
-      });
-    }
+    nextBtn?.addEventListener("click", () => {
+      if (currentIndex < total - 1) {
+        currentIndex++;
+        updateSlider();
+      }
+    });
+
+    lastBtn?.addEventListener("click", () => {
+      currentIndex = total - 1;
+      updateSlider();
+    });
+
+    updateButtons();
   }
 }
 

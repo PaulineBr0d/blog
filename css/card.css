@@ -26,7 +26,7 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     align-items: stretch;
     color: #333;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /*.card:hover {
@@ -79,7 +79,11 @@
     font-size: clamp(1rem, 1.5vw, 1.8rem);
     line-height: 1.2;
     margin-bottom: 16px;
-    gap: clamp(12px, 2vw, 24px);   
+    gap: clamp(12px, 2vw, 24px); 
+    display: -webkit-box;
+    -webkit-line-clamp: 3;       
+    -webkit-box-orient: vertical;
+    overflow: hidden;  
 }
 
 .wrap-menu {

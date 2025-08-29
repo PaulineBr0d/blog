@@ -201,9 +201,10 @@ function loadDetail() {
           </div> 
           <div class="right-content">
             <div class="map">
-              <button id="first"></button>
-              <button id="next"></button>
-              <button id="last"></button>
+              <button id="first"><i class="fas fa-backward-fast"></i></button>
+              <button id="prev"><i class="fas fa-chevron-left"></i></button>
+              <button id="next"><i class="fas fa-chevron-right"></i></button>
+              <button id="last"><i class="fas fa-forward-fast"></i></button>
             </div>
             <div class="center">
               <div class="wrapper">
