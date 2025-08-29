@@ -132,6 +132,7 @@ a:hover {
 
 .map > button {
   background: #00B18A;
+  color: white;
   border: none;
   cursor: pointer;
   margin: 0 0.25em;
