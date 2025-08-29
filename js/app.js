@@ -143,7 +143,7 @@ function loadDetail() {
       const formattedDate = `${day}/${month}/${year}`;
 
       // Charger les images et calculer leur aspect ratio
-      const imageLoadPromises = rando.images.map(img => {
+     /* const imageLoadPromises = rando.images.map(img => {
         return new Promise(resolve => {
           const tempImg = new Image();
           tempImg.onload = () => {
@@ -169,7 +169,10 @@ function loadDetail() {
                 style="aspect-ratio: ${image.aspectRatio}; object-fit: contain;" />
             </div>
           `;
-        }).join('');
+        }).join('');*/
+        const imagesHTML = rando.images
+          .map(img => `<div class="img-detail"><img src="${optimizeCloudinaryUrl(img.url)}" alt="${img.public_id}"></div>`)
+          .join('');
 
         const linkHTML = rando.url
           ? `<a href="${rando.url}" target="_blank"><i class="fa-solid fa-link"></i></a>`
@@ -225,8 +228,8 @@ function loadDetail() {
 
         const imageCount = detail.querySelectorAll('.img-detail').length;
         initSlider(imageCount);
-      });
-    })
+      })/*;
+    })*/
     .catch(err => {
       main.innerHTML = `<p class="error">Erreur lors du chargement de la randonnée 😕</p>`;
       console.error(err);
