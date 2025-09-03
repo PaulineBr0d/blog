@@ -18,7 +18,9 @@ li{
     position: relative;
     margin: 10px;
 }
-
+.menu-container{
+    color:white;
+}
 .menu-title {
     display: block;
     padding: clamp(2px, 0.5rem, 16px);
