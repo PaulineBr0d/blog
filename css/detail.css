@@ -134,8 +134,8 @@ a:hover {
     background-color: #00B18A;
     border: none;
     border-radius: 50%; 
-    width: clamp(10px, 2vw, 30px);
-    height: clamp(10px, 2vw, 30px);
+    width: clamp(40px, 10vw, 60px);
+    height: clamp(40px, 10vw, 60px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,6 +145,7 @@ a:hover {
 
 .map button i {
     color: #000; 
+    font-size: clamp(16px, 4vw, 24px);
     transition: transform 0.3s ease, color 0.3s ease;
     font-size: 1.2em;
 }
