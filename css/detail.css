@@ -123,13 +123,19 @@ a:hover {
   object-fit: contain;
   margin: 0 auto;
 }
-
+.map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 10px;
+}
 .map button {
     background-color: #00B18A;
     border: none;
     border-radius: 50%; 
-    width: 50px;
-    height: 50px;
+    width: clamp(10px, 2vw, 30px);
+    height: clamp(10px, 2vw, 30px);
     display: flex;
     justify-content: center;
     align-items: center;
