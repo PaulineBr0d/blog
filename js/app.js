@@ -1,9 +1,10 @@
-//ajout d'un fonction pour limiter le chargment des images
+//ajout d'un fonction pour limiter le chargement des images
 function optimizeCloudinaryUrl(url, options = "w_1200,q_auto,f_auto") {
   if (!url) return "";
   return url.replace("/upload/", `/upload/${options}/`);
 }
 
+//lancement de l'API pour récupérer les données
 fetch('https://magicpiks.onrender.com/api/data') 
   .then(res => res.json())
   .then(data => {
@@ -37,6 +38,8 @@ const { locations, difficulties, interests, tags } = extractCategories(data);
       index.appendChild(error);}
 );
 
+
+//extraction des sous-menus
 function extractCategories(data) {
   const locations = [...new Set(data.map(r => r.location))];
   const difficulties = [...new Set(data.map(r => r.difficulty))];
@@ -208,7 +211,7 @@ function loadDetail() {
     });
 }
 
-// FILTRES : Redirection au clic selon ton menu HTML
+// FILTRES : Redirection selon sous-menu(s) sélectionné(s)
 function initFilters() {
   document.querySelectorAll('.menu-dropdown li').forEach(item => {
     item.addEventListener('click', () => {
@@ -229,7 +232,7 @@ function initFilters() {
 }
 
 
-//Créer le menu déroulant
+//création du menu déroulant
 function generateMenusFromData(data) {
    
   const menuContainer = document.getElementById('menu-container');
@@ -278,7 +281,7 @@ function generateMenusFromData(data) {
 
 }
 
-//Ouvre le menu déroulant
+//ouverture du menu déroulant
 function initMenuToggle() {
   document.querySelectorAll('.menu-title').forEach((title) => {
     title.addEventListener('click', () => {
@@ -290,7 +293,7 @@ function initMenuToggle() {
   });
 }
 
-//Sélection et affichage d'une option dans le menu déroulant 
+//sélection et affichage d'une option dans le menu déroulant 
 function initMenuListeners() {
   document.querySelectorAll('.menu-dropdown li').forEach(item => {
     item.addEventListener('click', () => {
@@ -310,7 +313,7 @@ function initMenuListeners() {
   });
 }
 
-//Pour styliser les tags dans la page détail
+//Style des tags de la page détail
 function highlightTagsInDescription(description, tags) {
   let highlighted = description;
 

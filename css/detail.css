@@ -144,6 +144,7 @@ a:hover {
 
 .map > button i {
   font-size:  clamp(0.5rem, 0.8vw, 1.2rem);
+  font-size: clamp(10px, 2vw, 30px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,7 +153,7 @@ a:hover {
 }
 
 .map > button:hover {
-  background-color: #007f66;
+  /*background-color: #007f66;*/
   transform: scale(1.2);
 }
 

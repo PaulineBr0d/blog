@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Magic Piks</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Voltaire&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&family=Voltaire&family=Montserrat&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&family=Voltaire&family=Montserrat&display=swap" media="all">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/script.js" defer></script>
@@ -23,10 +25,11 @@
   </header>
     <nav>
       <img class="img-navbar" id="img-logo" src="assets/Design_plat_Appareil_photo_vert.svg.png" alt="logo" />
-      <img class="img-navbar" id="img-illustration" src="assets/4328351-removebg-preview.png" alt="illustration" />
+      <img class="img-navbar" id="img-illustration" src="assets/4328351-removebg-preview.png" alt="illustration"/>
       </nav>
     <aside class="sidebar">
-      <div id="menu-container">Chargement...</div>
+      <div id="menu-container">
+            <div class="menu-skeleton">Chargement...</div>
       <div class="end-menu">
       <div class="menu-reset">
       <i id="reset-menu" class="fa-solid fa-arrow-rotate-left" title="Reset"></i>

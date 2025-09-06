@@ -1,3 +1,6 @@
+//création d'une randonnée dans le formulaire => envoi dans la BDD: MongoDB pour le texte et Cloudinary pour le stockage des photos
+
+//création du slug pour le titre de la randonnée
 function slugify(text) {
   return text.toString().normalize("NFD") // Enlève les accents
     .replace(/[\u0300-\u036f]/g, "") // Supprime les diacritiques
@@ -8,6 +11,8 @@ function slugify(text) {
     .replace(/\-\-+/g, '-'); // Réduit les tirets doubles
 }
 
+
+//connexion à Cloudinary via l'API
 let cloudName = '';
 let uploadPreset = '';
 
@@ -22,6 +27,7 @@ async function fetchCloudinaryConfig() {
   }
 }
 
+//Upload des photos et récupération de l'url
 async function uploadImageToCloudinary(file, folder) {
   const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
 
@@ -41,9 +47,13 @@ async function uploadImageToCloudinary(file, folder) {
    return { url: data.secure_url, public_id: data.public_id };
 }
 
+//définition du nombre et taille des photos
 const MAX_FILES = 10;
 const MAX_FILE_SIZE_MB = 3;
 
+
+
+//contrôle du dépôt des images dans le formulaire
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     await fetchCloudinaryConfig();
@@ -95,6 +105,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+
+  //envoi des données via l'API
   form.addEventListener('submit', async function (event) {
     event.preventDefault();
     errorMessage.textContent = "";
