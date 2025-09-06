@@ -123,6 +123,7 @@ a:hover {
   object-fit: contain;
   margin: 0 auto;
 }
+
 .map {
     display: flex;
     justify-content: center;
@@ -130,12 +131,13 @@ a:hover {
     gap: 30px;
     padding: 10px;
 }
+
 .map button {
     background-color: #00B18A;
     border: none;
     border-radius: 50%; 
-    width: clamp(40px, 10vw, 60px);
-    height: clamp(40px, 10vw, 60px);
+    width: clamp(32px, 7vw, 48px);  
+    height: clamp(32px, 7vw, 48px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,7 +147,7 @@ a:hover {
 
 .map button i {
     color: #000; 
-    font-size: clamp(16px, 4vw, 24px);
+     font-size: clamp(14px, 3vw, 20px);
     transition: transform 0.3s ease, color 0.3s ease;
     font-size: 1.2em;
 }
