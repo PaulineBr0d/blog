@@ -136,8 +136,8 @@ a:hover {
     background-color: #00B18A;
     border: none;
     border-radius: 50%; 
-    width: clamp(32px, 7vw, 48px);  
-    height: clamp(32px, 7vw, 48px);
+    width: clamp(30px, 5vw, 40px);  
+    height: clamp(30px, 5vw, 40px);
     display: flex;
     justify-content: center;
     align-items: center;
