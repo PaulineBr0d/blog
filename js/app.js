@@ -1,6 +1,6 @@
 //ajout d'un fonction pour limiter le chargement des images
-function optimizeCloudinaryUrl(url, options = "w_1200,q_auto,f_auto") {
-  if (!url) return "";
+function optimizeCloudinaryUrl(url, options = "w_auto,dpr_auto,q_auto,f_webp") {
+  if (typeof url !== "string" || !url.includes("/upload/")) return url || "";
   return url.replace("/upload/", `/upload/${options}/`);
 }
 
@@ -61,9 +61,8 @@ function loadIndex(data) {
     bloc.innerHTML = `
   <details ${isSecond ? 'open' : ''} name="paysages">
     <summary><img  src="${optimizeCloudinaryUrl(rando.images[0]?.url)}"  
-          alt="${rando.title}"  
-          width="1200"
-          height="600"
+          alt="${rando.title}"
+          loading="lazy"  
           fetchpriority="high"
           decoding="async">
     </summary>
