@@ -62,7 +62,6 @@ function loadIndex(data) {
   <details ${isSecond ? 'open' : ''} name="paysages">
     <summary><img  src="${optimizeCloudinaryUrl(rando.images[0]?.url)}"  
           alt="${rando.title}"
-          loading="lazy" 
           fetchpriority="high"
           decoding="async">
     </summary>
