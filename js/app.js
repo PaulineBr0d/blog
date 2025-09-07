@@ -56,14 +56,15 @@ function loadIndex(data) {
     .sort((a, b) => new Date(b.date) - new Date(a.date)) //
     .slice(0, 4); 
   lastFour.forEach((rando, index)  => {
-    const isSecond = index === 1;
+    const isFirst = index === 0;
     const bloc = document.createElement('div');
     bloc.innerHTML = `
-  <details ${isSecond ? 'open' : ''} name="paysages">
+  <details ${isFirst ? 'open' : ''} name="paysages">
     <summary><img  src="${optimizeCloudinaryUrl(rando.images[0]?.url)}"  
           alt="${rando.title}"
-          fetchpriority="high"
-          decoding="async">
+          ${isFirst ? 'fetchpriority="high"' : 'loading="lazy"'}
+          decoding="async"
+          width="100%" 
     </summary>
     <div class="details-content">
       <h2><a href="detail.html?id=${rando._id}">${rando.title}</a></h2>
