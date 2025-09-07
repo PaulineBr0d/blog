@@ -60,7 +60,7 @@ function loadIndex(data) {
     const bloc = document.createElement('div');
     bloc.innerHTML = `
   <details ${isFirst ? 'open' : ''} name="paysages">
-    <summary><img  src="${optimizeCloudinaryUrl(rando.images[0]?.url, "w_700,q_auto,f_webp")}"  
+    <summary><img  src="${optimizeCloudinaryUrl(rando.images[0]?.url)}"  
           alt="${rando.title}"
           ${isFirst ? 'fetchpriority="high"' : 'loading="lazy"'}
           decoding="async"
