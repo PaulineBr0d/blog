@@ -59,18 +59,32 @@ function loadIndex(data) {
     .slice(0, 4);
 
   lastFour.forEach((rando, index) => {
-    const imageUrl = optimizeCloudinaryUrl(rando.images[0]?.url);
+    const imageUrl = optimizeCloudinaryUrl(rando.images[0]?.url, "w_1200,q_auto,f_webp");
 
+     if (index === 0) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = imageUrl;
+      document.head.appendChild(link);
+    }
+    
     const panel = document.createElement('div');
     panel.classList.add('panel');
     if (index === 0) panel.classList.add('active');
     panel.style.backgroundImage = `url('${imageUrl}')`;
 
     panel.innerHTML = `
-      <img src="${imageUrl}" alt="" aria-hidden="true" style="display:none" loading="${index === 0 ? 'eager' : 'lazy'}" />
+  
+      <img 
+        src="${imageUrl}" 
+        alt="${rando.title}" 
+        ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} 
+        decoding="async"
+      >
       <h2><a href="detail.html?id=${rando._id}">${rando.title}</a></h2>
     `;
-     panel.addEventListener('click', () => {
+      panel.addEventListener('click', () => {
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       panel.classList.add('active');
     });
