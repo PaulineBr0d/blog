@@ -22,7 +22,12 @@ fetch('https://magicpiks.onrender.com/api/data')
         generateMenusFromData(menus);
         initMenuToggle();
       }
-      
+      if (page === 'listing') {
+        loadListingFiltered(data);
+      }
+
+      if (page === 'detail') {
+        loadDetail();
     };
 
     if ('requestIdleCallback' in window) {
@@ -68,7 +73,7 @@ function loadIndex(data) {
       link.href = imageUrl;
       document.head.appendChild(link);
     }
-    
+
     const panel = document.createElement('div');
     panel.classList.add('panel');
     if (index === 0) panel.classList.add('active');
