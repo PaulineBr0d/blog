@@ -29,10 +29,6 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/*.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
-}*/
 
 .img-card {
     flex: 1;
@@ -113,9 +109,4 @@
     background-color: #444;
     color: #B4B3B3;
 }
-
-/*.menu-location .icon::before { content: "\f124"; }
-.menu-difficult .icon::before { content: "\f201"; }
-.menu-heart .icon::before { content: "\f08a"; }
-.menu-tag .icon::before { content: "\f02c"; } */   
 

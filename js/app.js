@@ -125,7 +125,7 @@ function loadListingFiltered(data) {
   }
 
   filtered.forEach((rando, index) => {
-    const imageUrl = optimizeCloudinaryUrl(rando.images[0]?.url, "w_800,q_auto,f_auto");
+    const imageUrl = optimizeCloudinaryUrl(rando.images[0]?.url, "w_300,q_auto,f_auto");
     const isPriority = index < 3; 
     const tagsHtml = rando.tags.map(tag => `<h4 class="menu-card menu-tag tag-card"><span class="icon">${tag}</span></h4>`).join('');
     const card = document.createElement('div');
