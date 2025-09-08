@@ -125,16 +125,21 @@ function loadListingFiltered(data) {
   }
 
   filtered.forEach(rando => {
+    const imageUrl = optimizeCloudinaryUrl(rando.images[0]?.url, "w_800,q_auto,f_auto");
+    const isPriority = index < 3; 
     const tagsHtml = rando.tags.map(tag => `<h4 class="menu-card menu-tag tag-card"><span class="icon">${tag}</span></h4>`).join('');
     const card = document.createElement('div');
     card.className = 'card';
-    card.innerHTML = `
-      <div class="img-card">   <img src="${optimizeCloudinaryUrl(rando.images[0]?.url) || 'fallback.jpg'}" 
-          alt="${rando.title}" 
-          width="1200"
-          height="600"
-          fetchpriority="high"
-          decoding="async"></div>
+     card.innerHTML = `
+    <div class="img-card">
+      <img 
+        src="${imageUrl}" 
+        alt="${rando.title}" 
+        width="800"
+        height="450"
+        ${isPriority ? 'fetchpriority="high"' : 'loading="lazy"'}
+        decoding="async"
+      ></div>
       <div class="card-content">
       <div class="card-title"><a href="detail.html?id=${rando._id}"><h2>${rando.title}</h2></a></div>
       <div class="description">
@@ -170,7 +175,7 @@ function loadDetail() {
       const formattedDate = `${day}/${month}/${year}`;
 
         const imagesHTML = rando.images
-          .map(img => `<div class="img-detail"><img src="${optimizeCloudinaryUrl(img.url)}" alt="${img.public_id}"></div>`)
+          .map(img => `<div class="img-detail"><img src="${optimizeCloudinaryUrl(img.url, "w_1200,q_auto,f_webp")}" alt="${img.public_id}"></div>`)
           .join('');
 
         const linkHTML = rando.url
