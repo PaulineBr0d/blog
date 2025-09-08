@@ -9,26 +9,26 @@ fetch('https://magicpiks.onrender.com/api/data')
   .then(res => res.json())
   .then(data => {
     const page = document.body.getAttribute('data-page');
-    if (page === 'index') {
-      loadIndex(data);
-     
-const { locations, difficulties, interests, tags } = extractCategories(data);
+    const runWhenIdle = () => {
+      if (page === 'index') {
+        loadIndex(data);
+        const { locations, difficulties, interests, tags } = extractCategories(data);
+        const menus = {
+          'Massif': locations,
+          'Difficulté': difficulties,
+          'Intérêt': interests,
+          'Tag': tags,
+        };
+        generateMenusFromData(menus);
+        initMenuToggle();
+      }
+      
+    };
 
-  const menus = {
-    'Massif': locations,
-    'Difficulté': difficulties,
-    'Intérêt': interests,
-    'Tag': tags,
-  };
-
-      generateMenusFromData(menus);
-      initMenuToggle();
-    }
-    if (page === 'listing') {
-      loadListingFiltered(data);
-    }
-    if (page === 'detail') {
-      loadDetail();
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(runWhenIdle);
+    } else {
+      setTimeout(runWhenIdle, 200);
     }
   })
   .catch(err => {console.error('Erreur API', err);
@@ -67,6 +67,7 @@ function loadIndex(data) {
     panel.style.backgroundImage = `url('${imageUrl}')`;
 
     panel.innerHTML = `
+      <img src="${imageUrl}" alt="" aria-hidden="true" style="display:none" loading="${index === 0 ? 'eager' : 'lazy'}" />
       <h2><a href="detail.html?id=${rando._id}">${rando.title}</a></h2>
     `;
      panel.addEventListener('click', () => {
