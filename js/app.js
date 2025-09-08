@@ -22,12 +22,15 @@ fetch('https://magicpiks.onrender.com/api/data')
         generateMenusFromData(menus);
         initMenuToggle();
       }
-      if (page === 'listing') {
-        loadListingFiltered(data);
-      }
+     
+        if (page === 'listing') {
+          loadListingFiltered(data);
+        }
 
-      if (page === 'detail') {
-        loadDetail();
+        if (page === 'detail') {
+          loadDetail();
+        }
+
     };
 
     if ('requestIdleCallback' in window) {
