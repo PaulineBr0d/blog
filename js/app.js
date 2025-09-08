@@ -52,29 +52,31 @@ function extractCategories(data) {
 // PAGE INDEX : Affiche les 4 dernières randos
 function loadIndex(data) {
   const gallery = document.querySelector('.gallery');
-  const lastFour = [...data]
-    .sort((a, b) => new Date(b.date) - new Date(a.date)) //
-    .slice(0, 4); 
-  lastFour.forEach((rando, index)  => {
-    const isFirst = index === 0;
-    const bloc = document.createElement('div');
-    bloc.innerHTML = `
-  <details ${isFirst ? 'open' : ''} name="paysages">
-    <summary><img  src="${optimizeCloudinaryUrl(rando.images[0]?.url)}"  
-          alt="${rando.title}"
-          ${isFirst ? 'fetchpriority="high"' : 'loading="lazy"'}
-          decoding="async"
-          width="100%" 
-    </summary>
-    <div class="details-content">
-      <h2><a href="detail.html?id=${rando._id}">${rando.title}</a></h2>
-    </div>
-  </details>`
-;
+  gallery.classList.add('split-carousel'); // assure-toi que ce style est appliqué
 
-gallery.appendChild(bloc.firstElementChild);
+  const lastFour = [...data]
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 4);
+
+  lastFour.forEach((rando, index) => {
+    const imageUrl = optimizeCloudinaryUrl(rando.images[0]?.url);
+
+    const panel = document.createElement('div');
+    panel.classList.add('panel');
+    if (index === 0) panel.classList.add('active');
+    panel.style.backgroundImage = `url('${imageUrl}')`;
+
+    panel.innerHTML = `
+      <h2><a href="detail.html?id=${rando._id}">${rando.title}</a></h2>
+    `;
+     panel.addEventListener('click', () => {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      panel.classList.add('active');
+    });
+    gallery.appendChild(panel);
   });
 }
+
 
 // PAGE LISTING : Affiche les résultats filtrés
 function loadListingFiltered(data) {
@@ -178,10 +180,23 @@ function loadDetail() {
           </div> 
           <div class="right-content">
             <div class="map">
-              <button id="first"><i class="fas fa-backward-step"></i></button>
-              <button id="prev"><i class="fas fa-chevron-left"></i></button>
-              <button id="next"><i class="fas fa-chevron-right"></i></button>
-              <button id="last"><i class="fas fa-forward-step"></i></button>
+              <div class="map"> 
+              <button id="first" aria-label="Aller au premier élément">
+                <i class="fas fa-backward-step"></i>
+              </button>
+
+              <button id="prev" aria-label="Élément précédent">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+
+              <button id="next" aria-label="Élément suivant">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+
+              <button id="last" aria-label="Aller au dernier élément">
+                <i class="fas fa-forward-step"></i>
+              </button>
+            </div>
             </div>
             <div class="center">
               <div class="wrapper">

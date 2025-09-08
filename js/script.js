@@ -44,7 +44,7 @@ if (confirmBtn) {
   }
 })
 
-
+ 
 //Boutons header
 document.addEventListener('DOMContentLoaded', () => {
   const homeBtn = document.getElementById('home');
