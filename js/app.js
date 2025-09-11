@@ -80,7 +80,7 @@ function loadIndex(data) {
     const panel = document.createElement('div');
     panel.classList.add('panel');
     if (index === 0) panel.classList.add('active');
-    panel.style.backgroundImage = `url('${imageUrl}')`;
+    /*panel.style.backgroundImage = `url('${imageUrl}')`;*/
 
     panel.innerHTML = `
   
