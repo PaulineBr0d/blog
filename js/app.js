@@ -80,18 +80,22 @@ function loadIndex(data) {
     const panel = document.createElement('div');
     panel.classList.add('panel');
     if (index === 0) panel.classList.add('active');
-    /*panel.style.backgroundImage = `url('${imageUrl}')`;*/
 
-    panel.innerHTML = `
-  
-      <img 
-        src="${imageUrl}" 
-        alt="${rando.title}" 
-        ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} 
-        decoding="async"
-      >
-      <h2><a href="detail.html?id=${rando._id}">${rando.title}</a></h2>
-    `;
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.alt = rando.title || 'Rando'; 
+      img.loading = index === 0 ? undefined : 'lazy';
+      img.fetchPriority = index === 0 ? 'high' : undefined;
+      img.decoding = 'async';
+      panel.appendChild(img);
+      const h2 = document.createElement('h2');
+      const link = document.createElement('a');
+      link.href = `detail.html?id=${rando._id}`;
+      link.textContent = rando.title;
+      h2.appendChild(link);
+      panel.appendChild(h2);
+
+
       panel.addEventListener('click', () => {
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       panel.classList.add('active');
@@ -109,7 +113,6 @@ function loadListingFiltered(data) {
   const int = params.get('interest');
   const tag = params.get('tag');
 
-  
   let filtered = [...data].reverse();
   if (loc) filtered = filtered.filter(r => r.location === loc);
   if (diff) filtered = filtered.filter(r => r.difficulty === diff);
@@ -117,45 +120,96 @@ function loadListingFiltered(data) {
   if (tag) filtered = filtered.filter(r => r.tags.includes(tag));
 
   const containerFilter = document.querySelector('.container-filter');
- containerFilter.innerHTML = '';
+  containerFilter.innerHTML = '';
 
   if (filtered.length === 0) {
-    containerFilter.innerHTML = '<p>Aucune randonnée trouvée 😕</p>';
+    const msg = document.createElement('p');
+    msg.textContent = 'Aucune randonnée trouvée 😕';
+    containerFilter.appendChild(msg);
     return;
   }
 
   filtered.forEach((rando, index) => {
     const imageUrl = optimizeCloudinaryUrl(rando.images[0]?.url, "w_800,q_auto,f_auto");
-    const isPriority = index < 3; 
-    const tagsHtml = rando.tags.map(tag => `<h4 class="menu-card menu-tag tag-card"><span class="icon">${tag}</span></h4>`).join('');
+    const isPriority = index < 3;
+
     const card = document.createElement('div');
     card.className = 'card';
-     card.innerHTML = `
-    <div class="img-card">
-      <img 
-        src="${imageUrl}" 
-        alt="${rando.title}" 
-        width="800"
-        height="450"
-        ${isPriority ? 'fetchpriority="high"' : 'loading="lazy"'}
-        decoding="async"
-      ></div>
-      <div class="card-content">
-      <div class="card-title"><a href="detail.html?id=${rando._id}"><h2>${rando.title}</h2></a></div>
-      <div class="description">
-        <p>${rando.description}</p>
-        </div>
-        <span class="wrap-menu">
-          <h4 class="menu-card menu-location"><span class="icon">${rando.location}</h4>
-          <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</h4>
-          <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</h4>
-          ${tagsHtml}
-        </span>
-      </div>`;
+
+    // Image
+    const imgContainer = document.createElement('div');
+    imgContainer.className = 'img-card';
+
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.alt = rando.title || 'Image rando';
+    img.width = 800;
+    img.height = 450;
+    img.decoding = 'async';
+    if (isPriority) img.fetchPriority = 'high';
+    else img.loading = 'lazy';
+
+    imgContainer.appendChild(img);
+    card.appendChild(imgContainer);
+
+    // Content
+    const content = document.createElement('div');
+    content.className = 'card-content';
+
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'card-title';
+
+    const link = document.createElement('a');
+    link.href = `detail.html?id=${rando._id}`;
+    const h2 = document.createElement('h2');
+    h2.textContent = rando.title;
+    link.appendChild(h2);
+    titleDiv.appendChild(link);
+    content.appendChild(titleDiv);
+
+    const descDiv = document.createElement('div');
+    descDiv.className = 'description';
+    const p = document.createElement('p');
+    p.textContent = rando.description;
+    descDiv.appendChild(p);
+    content.appendChild(descDiv);
+
+    const wrapMenu = document.createElement('span');
+    wrapMenu.className = 'wrap-menu';
+
+    const fields = [
+      { className: 'menu-location', value: rando.location },
+      { className: 'menu-difficult', value: rando.difficulty },
+      { className: 'menu-heart', value: rando.interest }
+    ];
+
+    fields.forEach(f => {
+      const h4 = document.createElement('h4');
+      h4.className = `menu-card ${f.className}`;
+      const span = document.createElement('span');
+      span.className = 'icon';
+      span.textContent = f.value;
+      h4.appendChild(span);
+      wrapMenu.appendChild(h4);
+    });
+
+    // Tags
+    rando.tags.forEach(tag => {
+      const h4 = document.createElement('h4');
+      h4.className = 'menu-card menu-tag tag-card';
+      const span = document.createElement('span');
+      span.className = 'icon';
+      span.textContent = tag;
+      h4.appendChild(span);
+      wrapMenu.appendChild(h4);
+    });
+
+    content.appendChild(wrapMenu);
+    card.appendChild(content);
+
     containerFilter.appendChild(card);
   });
 }
-
 
 // PAGE DETAIL : Affiche les infos d’une rando par ID
 function loadDetail() {
@@ -169,89 +223,131 @@ function loadDetail() {
     })
     .then(rando => {
       const rawDate = new Date(rando.date);
-      const day = String(rawDate.getDate()).padStart(2, '0');
-      const month = String(rawDate.getMonth() + 1).padStart(2, '0');
-      const year = String(rawDate.getFullYear());
-      const formattedDate = `${day}/${month}/${year}`;
+      const formattedDate = rawDate.toLocaleDateString('fr-FR');
 
-        const imagesHTML = rando.images
-          .map(img => `<div class="img-detail"><img src="${optimizeCloudinaryUrl(img.url, "w_1200,q_auto,f_webp")}" alt="${img.public_id}"></div>`)
-          .join('');
+      const detail = document.createElement('div');
+      detail.className = 'detail';
 
-        const linkHTML = rando.url
-          ? `<a href="${rando.url}" target="_blank"><i class="fa-solid fa-link"></i></a>`
-          : `<i class="fa-solid fa-link-slash"></i>`;
+      // LEFT CARD
+      const leftCard = document.createElement('div');
+      leftCard.className = 'left-card';
 
-        const highlightedDescription = highlightTagsInDescription(rando.description, rando.tags);
+      const content = document.createElement('div');
+      content.className = 'content';
 
-        const detail = document.createElement('div');
-        detail.className = 'detail';
-        detail.innerHTML = `
-          <div class="left-card">
-            <div class="content">
-              <div class="sub-title">
-                <h2>${rando.title}</h2>
-                <span>${linkHTML}</span>
-              </div>
-              <div class="main-info">
-                <div class="detail-menu">
-                  <h4 class="menu-card menu-date"><span class="icon">${formattedDate}</span></h4>
-                  <h4 class="menu-card menu-location"><span class="icon">${rando.location}</span></h4>
-                  <h4 class="menu-card menu-difficult"><span class="icon">${rando.difficulty}</span></h4>
-                  <h4 class="menu-card menu-heart"><span class="icon">${rando.interest}</span></h4>
-                </div>  
-                <div class="text">
-                  <p>${highlightedDescription}</p>
-                </div>
-              </div>
-            </div> 
-          </div> 
-          <div class="right-content">
-            <div class="map">
-              <div class="map"> 
-              <button id="first" aria-label="Aller au premier élément">
-                <i class="fas fa-backward-step"></i>
-              </button>
+      const subTitle = document.createElement('div');
+      subTitle.className = 'sub-title';
 
-              <button id="prev" aria-label="Élément précédent">
-                <i class="fas fa-chevron-left"></i>
-              </button>
+      const titleH2 = document.createElement('h2');
+      titleH2.textContent = rando.title;
 
-              <button id="next" aria-label="Élément suivant">
-                <i class="fas fa-chevron-right"></i>
-              </button>
+      const spanLink = document.createElement('span');
+      if (rando.url) {
+        const link = document.createElement('a');
+        link.href = rando.url;
+        link.target = '_blank';
+        link.innerHTML = `<i class="fa-solid fa-link"></i>`;
+        spanLink.appendChild(link);
+      } else {
+        spanLink.innerHTML = `<i class="fa-solid fa-link-slash"></i>`;
+      }
 
-              <button id="last" aria-label="Aller au dernier élément">
-                <i class="fas fa-forward-step"></i>
-              </button>
-            </div>
-            </div>
-            <div class="center">
-              <div class="wrapper">
-                <div class="inner">
-                  ${imagesHTML}
-                </div> 
-              </div> 
-            </div>
-          </div> 
-        `;
+      subTitle.appendChild(titleH2);
+      subTitle.appendChild(spanLink);
+      content.appendChild(subTitle);
 
-        const skeleton = main.querySelector('.loading-skeleton');
-        if (skeleton) {
-          skeleton.replaceWith(detail);
-        } else {
-          main.appendChild(detail);
-        }
+      const mainInfo = document.createElement('div');
+      mainInfo.className = 'main-info';
 
-        const imageCount = detail.querySelectorAll('.img-detail').length;
-        initSlider(imageCount);
-      })/*;
-    })*/
+      const detailMenu = document.createElement('div');
+      detailMenu.className = 'detail-menu';
+
+      const fields = [
+        { className: 'menu-date', value: formattedDate },
+        { className: 'menu-location', value: rando.location },
+        { className: 'menu-difficult', value: rando.difficulty },
+        { className: 'menu-heart', value: rando.interest }
+      ];
+
+      fields.forEach(f => {
+        const h4 = document.createElement('h4');
+        h4.className = `menu-card ${f.className}`;
+        const span = document.createElement('span');
+        span.className = 'icon';
+        span.textContent = f.value;
+        h4.appendChild(span);
+        detailMenu.appendChild(h4);
+      });
+
+      mainInfo.appendChild(detailMenu);
+
+      const textDiv = document.createElement('div');
+      textDiv.className = 'text';
+      const desc = document.createElement('p');
+
+      
+      desc.innerHTML = highlightTagsInDescription(rando.description, rando.tags);
+      textDiv.appendChild(desc);
+      mainInfo.appendChild(textDiv);
+
+      content.appendChild(mainInfo);
+      leftCard.appendChild(content);
+      detail.appendChild(leftCard);
+
+      // RIGHT CONTENT (carousel)
+      const rightContent = document.createElement('div');
+      rightContent.className = 'right-content';
+
+      const mapDiv = document.createElement('div');
+      mapDiv.className = 'map';
+
+      mapDiv.innerHTML = `
+        <button id="first" aria-label="Aller au premier élément"><i class="fas fa-backward-step"></i></button>
+        <button id="prev" aria-label="Élément précédent"><i class="fas fa-chevron-left"></i></button>
+        <button id="next" aria-label="Élément suivant"><i class="fas fa-chevron-right"></i></button>
+        <button id="last" aria-label="Aller au dernier élément"><i class="fas fa-forward-step"></i></button>
+      `;
+
+      rightContent.appendChild(mapDiv);
+
+      const centerDiv = document.createElement('div');
+      centerDiv.className = 'center';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'wrapper';
+      const inner = document.createElement('div');
+      inner.className = 'inner';
+
+      rando.images.forEach(img => {
+        const imgDetail = document.createElement('div');
+        imgDetail.className = 'img-detail';
+        const image = document.createElement('img');
+        image.src = optimizeCloudinaryUrl(img.url, "w_1200,q_auto,f_webp");
+        image.alt = img.public_id;
+        imgDetail.appendChild(image);
+        inner.appendChild(imgDetail);
+      });
+
+      wrapper.appendChild(inner);
+      centerDiv.appendChild(wrapper);
+      rightContent.appendChild(centerDiv);
+
+      detail.appendChild(rightContent);
+
+      const skeleton = main.querySelector('.loading-skeleton');
+      if (skeleton) {
+        skeleton.replaceWith(detail);
+      } else {
+        main.appendChild(detail);
+      }
+
+      initSlider(rando.images.length);
+    })
     .catch(err => {
       main.innerHTML = `<p class="error">Erreur lors du chargement de la randonnée 😕</p>`;
       console.error(err);
     });
 }
+
 
 // FILTRES : Redirection selon sous-menu(s) sélectionné(s)
 function initFilters() {
