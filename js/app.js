@@ -9,7 +9,7 @@ fetch('https://magicpiks.onrender.com/api/data')
   .then(res => res.json())
   .then(data => {
     const page = document.body.getAttribute('data-page');
-    const runWhenIdle = () => {
+    
       if (page === 'index') {
         loadIndex(data);
         const { locations, difficulties, interests, tags } = extractCategories(data);
@@ -31,14 +31,8 @@ fetch('https://magicpiks.onrender.com/api/data')
           loadDetail();
         }
 
-    };
-
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(runWhenIdle);
-    } else {
-      setTimeout(runWhenIdle, 200);
     }
-  })
+  )
   .catch(err => {console.error('Erreur API', err);
       const index = document.querySelector('.gallery');
       const error = document.createElement('div');
@@ -83,10 +77,15 @@ function loadIndex(data) {
 
       const img = document.createElement('img');
       img.src = imageUrl;
-      img.alt = rando.title || 'Rando'; 
-      img.loading = index === 0 ? undefined : 'lazy';
-      img.fetchPriority = index === 0 ? 'high' : undefined;
+      img.alt = rando.title || 'Rando';
       img.decoding = 'async';
+
+      if (index === 0) {
+        img.loading = 'eager';        // priorité de chargement immédiate
+        img.setAttribute('fetchpriority', 'high');   // priorité fetch élevée
+      } else {
+        img.loading = 'lazy';         // lazy loading pour les autres images
+      }
       panel.appendChild(img);
       const h2 = document.createElement('h2');
       const link = document.createElement('a');
