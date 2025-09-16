@@ -5,7 +5,7 @@ function optimizeCloudinaryUrl(url, options = "w_auto,dpr_auto,q_auto,f_webp") {
 }
 
 //Chargement initial des données
-fetch('https://magicpiks.onrender.com/api/data') 
+fetch('./data.json')
   .then(res => {
     if (!res.ok) throw new Error('Fichier data.json introuvable');
     return res.json();
@@ -59,8 +59,7 @@ function extractCategories(data) {
 // PAGE INDEX : Affiche les 4 dernières randos
 function loadIndex(data) {
   const gallery = document.querySelector('.gallery');
-  gallery.classList.add('split-carousel'); // assure-toi que ce style est appliqué
-
+  gallery.classList.add('split-carousel'); 
   const lastFour = [...data]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 4);
