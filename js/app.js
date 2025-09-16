@@ -5,9 +5,9 @@ function optimizeCloudinaryUrl(url, options = "w_auto,dpr_auto,q_auto,f_webp") {
 }
 
 //Chargement initial des données
-fetch('./data.json')
+fetch('https://magicpiks-75022637d756.herokuapp.com/api/data')
   .then(res => {
-    if (!res.ok) throw new Error('Fichier data.json introuvable');
+    if (!res.ok) throw new Error("Problème avec l'API");
     return res.json();
   })
   .then(data => {
