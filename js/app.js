@@ -4,8 +4,8 @@ function optimizeCloudinaryUrl(url, options = "w_auto,dpr_auto,q_auto,f_webp") {
   return url.replace("/upload/", `/upload/${options}/`);
 }
 
-//Chargement initial des données
-fetch('https://magicpiks-75022637d756.herokuapp.com/api/data')
+//lancement de l'API pour récupérer les données
+fetch('https://magicpiks.onrender.com/api/data') 
   .then(res => {
     if (!res.ok) throw new Error("Problème avec l'API");
     return res.json();
