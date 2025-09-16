@@ -4,14 +4,19 @@ function optimizeCloudinaryUrl(url, options = "w_auto,dpr_auto,q_auto,f_webp") {
   return url.replace("/upload/", `/upload/${options}/`);
 }
 
-//lancement de l'API pour récupérer les données
+//Chargement initial des données
 fetch('https://magicpiks.onrender.com/api/data') 
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error('Fichier data.json introuvable');
+    return res.json();
+  })
   .then(data => {
     const page = document.body.getAttribute('data-page');
     
       if (page === 'index') {
         loadIndex(data);
+
+         // Extraire les catégories et générer les menus
         const { locations, difficulties, interests, tags } = extractCategories(data);
         const menus = {
           'Massif': locations,
