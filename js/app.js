@@ -3,7 +3,10 @@ function optimizeCloudinaryUrl(url, options = "w_auto,dpr_auto,q_auto,f_webp") {
   if (typeof url !== "string" || !url.includes("/upload/")) return url || "";
   return url.replace("/upload/", `/upload/${options}/`);
 }
-
+function getOptimizedImageUrl(imagePath, width, height) {
+  return imagePath
+    .replace("/upload/", `/upload/w_${width},h_${height},c_fill,q_auto,f_webp/`);
+}
 //lancement de l'API pour récupérer les données
 fetch('https://magicpiks.onrender.com/api/data') 
   .then(res => {
@@ -65,8 +68,8 @@ function loadIndex(data) {
     .slice(0, 4);
 
   lastFour.forEach((rando, index) => {
-    const imageUrl = optimizeCloudinaryUrl(rando.images[0]?.url, "w_1200,q_auto,f_webp");
-
+    //const imageUrl = optimizeCloudinaryUrl(rando.images[0]?.url, "w_1200,q_auto,f_webp");
+    const imageUrl = getOptimizedImageUrl(rando.images[0]?.url, 800, 800);
      if (index === 0) {
       const link = document.createElement('link');
       link.rel = 'preload';

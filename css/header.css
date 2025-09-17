@@ -15,7 +15,7 @@ header{
         letter-spacing: 3px;
         }
 
-    .title > h4 {
+    .title > h2 {
         font-weight: 400;  
         font-size: clamp(20px, 3vh, 35px);
 
