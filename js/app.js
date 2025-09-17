@@ -62,38 +62,49 @@ function extractCategories(data) {
 // PAGE INDEX : Affiche les 4 dernières randos
 function loadIndex(data) {
   const gallery = document.querySelector('.gallery');
-  gallery.classList.add('split-carousel'); 
+  gallery.classList.add('split-carousel');
+
+  // Trier et récupérer les 4 dernières randos
   const lastFour = [...data]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 4);
 
+  // Précharger l’image de la première rando (pour LCP)
+  const firstImageUrl = getOptimizedImageUrl(lastFour[0]?.images?.[0]?.url, 800, 800);
+  if (firstImageUrl) {
+    const preloadLink = document.createElement('link');
+    preloadLink.rel = 'preload';
+    preloadLink.as = 'image';
+    preloadLink.href = firstImageUrl;
+    preloadLink.crossOrigin = 'anonymous';
+    document.head.prepend(preloadLink);
+  }
+
+  // Créer les panels pour chaque rando
   lastFour.forEach((rando, index) => {
-    //const imageUrl = optimizeCloudinaryUrl(rando.images[0]?.url, "w_1200,q_auto,f_webp");
-    const imageUrl = getOptimizedImageUrl(rando.images[0]?.url, 800, 800);
-     if (index === 0) {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = imageUrl;
-      document.head.appendChild(link);
-    }
+    const imageUrl = getOptimizedImageUrl(rando.images?.[0]?.url, 800, 800);
 
     const panel = document.createElement('div');
     panel.classList.add('panel');
     if (index === 0) panel.classList.add('active');
 
-      const img = document.createElement('img');
-      img.src = imageUrl;
-      img.alt = rando.title || 'Rando';
-      img.decoding = 'async';
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.alt = rando.title || 'Rando';
+    img.decoding = 'async';
+    img.crossOrigin = 'anonymous';
 
-      if (index === 0) {
-        img.loading = 'eager';        // priorité de chargement immédiate
-        img.setAttribute('fetchpriority', 'high');   // priorité fetch élevée
-      } else {
-        img.loading = 'lazy';         // lazy loading pour les autres images
-      }
-      panel.appendChild(img);
+    if (index === 0) {
+      img.loading = 'eager';
+      img.setAttribute('fetchpriority', 'high');
+    } else {
+      img.loading = 'lazy';
+    }
+
+    panel.appendChild(img);
+   
+  
+
       const h2 = document.createElement('h2');
       const link = document.createElement('a');
       link.href = `detail.html?id=${rando._id}`;
