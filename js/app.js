@@ -8,9 +8,9 @@ function getOptimizedImageUrl(imagePath, width, height) {
     .replace("/upload/", `/upload/w_${width},h_${height},c_fill,q_auto,f_webp/`);
 }
 //lancement de l'API pour récupérer les données
-fetch('https://magicpiks.onrender.com/api/data') 
+fetch('./public/data.json')
   .then(res => {
-    if (!res.ok) throw new Error("Problème avec l'API");
+    if (!res.ok) throw new Error("Problème avec le fichier de chargement");
     return res.json();
   })
   .then(data => {
