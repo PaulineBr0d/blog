@@ -233,12 +233,16 @@ function loadDetail() {
   const main = document.querySelector('main');
   const id = new URLSearchParams(window.location.search).get('id');
 
-  fetch(`https://magicpiks.onrender.com/api/data/${id}`)
-    .then(res => {
-      if (!res.ok) throw new Error('Rando introuvable 😕');
-      return res.json();
-    })
-    .then(rando => {
+  fetch('./public/data.json')
+  .then(res => {
+    if (!res.ok) throw new Error('Fichier data.json introuvable 😕');
+    return res.json();
+  })
+  .then(data => {
+    const rando = data.find(item => item._id === id); 
+    if (!rando) throw new Error('Rando introuvable 😕');
+
+    
       const rawDate = new Date(rando.date);
       const formattedDate = rawDate.toLocaleDateString('fr-FR');
 
