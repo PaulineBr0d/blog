@@ -9,13 +9,17 @@ Design original : [Figma](https://www.figma.com/design/GC5v95K5CKXshqJNZi0CTG/pr
 
 ## Fonctionnalités
 
-- Page d’accueil avec un galerie des **4 dernières randonnées** avec menus dynamique basé sur les données de l’API
+- Page d’accueil avec un galerie des **4 dernières randonnées** avec menus dynamique basé sur les données de l’API 
 - Page de **listing filtré** (par lieu, difficulté, intérêt, tag)
 - Page **détail** de rando avec :
   - Infos complètes
   - Galerie d’images (slider)
 - Page **Login** pour l’administrateur
 - Page **Add** avec un **formulaire d’ajout** de randonnée (titre, lieu, difficulté, intérêt, tags, images)
+
+## Sources de données
+
+Pour des raisons de performance et de limitations liées à l’hébergement (Render), l’interface front-end consomme un fichier `data.json` statique généré à partir de la base de données.
 
 
 ---
@@ -27,3 +31,4 @@ Design original : [Figma](https://www.figma.com/design/GC5v95K5CKXshqJNZi0CTG/pr
 - Cloudinary (gestion et optimisation d’images)
 - Node.js (backend – API REST)
 - Render (hébergement backend)
+- 
