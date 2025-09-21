@@ -1,12 +1,10 @@
 //ajout d'un fonction pour limiter le chargement des images
-function optimizeCloudinaryUrl(url, options = "w_auto,dpr_auto,q_auto,f_webp") {
-  if (typeof url !== "string" || !url.includes("/upload/")) return url || "";
-  return url.replace("/upload/", `/upload/${options}/`);
+function optimizeImageUrl(imagePath, options = "q_auto,f_webp,w_1000,h_1000,c_fill") {
+  if (typeof imagePath !== "string" || !imagePath.includes("/upload/")) return imagePath || "";
+  return imagePath.replace("/upload/", `/upload/${options}/`);
 }
-function getOptimizedImageUrl(imagePath, width, height) {
-  return imagePath
-    .replace("/upload/", `/upload/w_${width},h_${height},c_fill,q_auto,f_webp/`);
-}
+
+
 //lancement de l'API pour récupérer les données
 fetch('./public/data.json')
   .then(res => {
@@ -70,7 +68,7 @@ function loadIndex(data) {
     .slice(0, 4);
 
   // Précharger l’image de la première rando (pour LCP)
-  const firstImageUrl = getOptimizedImageUrl(lastFour[0]?.images?.[0]?.url, 800, 800);
+  const firstImageUrl = optimizeImageUrl(lastFour[0]?.images?.[0]?.url);
   if (firstImageUrl) {
     const preloadLink = document.createElement('link');
     preloadLink.rel = 'preload';
@@ -82,7 +80,7 @@ function loadIndex(data) {
 
   // Créer les panels pour chaque rando
   lastFour.forEach((rando, index) => {
-    const imageUrl = getOptimizedImageUrl(rando.images?.[0]?.url, 800, 800);
+    const imageUrl = optimizeImageUrl(rando.images?.[0]?.url);
 
     const panel = document.createElement('div');
     panel.classList.add('panel');
@@ -147,7 +145,7 @@ function loadListingFiltered(data) {
   }
 
   filtered.forEach((rando, index) => {
-    const imageUrl = optimizeCloudinaryUrl(rando.images[0]?.url, "w_800,q_auto,f_auto");
+    const imageUrl = optimizeImageUrl(rando.images[0]?.url);
     const isPriority = index < 3;
 
     const card = document.createElement('div');
@@ -342,7 +340,7 @@ function loadDetail() {
         const imgDetail = document.createElement('div');
         imgDetail.className = 'img-detail';
         const image = document.createElement('img');
-        image.src = optimizeCloudinaryUrl(img.url, "w_1200,q_auto,f_webp");
+        image.src = optimizeImageUrl(img.url);
         image.alt = img.public_id;
         imgDetail.appendChild(image);
         inner.appendChild(imgDetail);

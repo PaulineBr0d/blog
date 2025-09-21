@@ -1,7 +1,7 @@
 # Projet Blog Photos & Randos – Frontend
 
 ## Description
-Dans le cadre du début de ma formation **Concepteur Développeur d'Applications**, ce projet a été développé en **JavaScript Vanilla** (sans framework). Il s'agit du **frontend** de l’application **MagicPiks**, qui permet l’affichage dynamique de randonnées via une API REST. Les données sont récupérées depuis un backend **Node.js** déployé sur **Render**.
+Dans le cadre du début de ma formation **Concepteur Développeur d'Applications**, ce projet a été développé en **JavaScript Vanilla** (sans framework pour apprendre les bases.)  Il s'agit du **frontend** de l’application **MagicPiks**, qui permet l’affichage dynamique de randonnées via une API REST. Les données sont récupérées depuis un backend **Node.js** déployé sur **Render**.
 
 Design original : [Figma](https://www.figma.com/design/GC5v95K5CKXshqJNZi0CTG/projet_formation?node-id=3-1682&t=Nt0IzPanDyLM6y2a-0)
 
@@ -9,7 +9,7 @@ Design original : [Figma](https://www.figma.com/design/GC5v95K5CKXshqJNZi0CTG/pr
 
 ## Fonctionnalités
 
-- Page d’accueil avec un galerie des **4 dernières randonnées** avec menus dynamique basé sur les données de l’API 
+- Page d’accueil avec une galerie des **4 dernières randonnées** avec menu dynamique basé sur les données de l’API 
 - Page de **listing filtré** (par lieu, difficulté, intérêt, tag)
 - Page **détail** de rando avec :
   - Infos complètes
@@ -19,8 +19,14 @@ Design original : [Figma](https://www.figma.com/design/GC5v95K5CKXshqJNZi0CTG/pr
 
 ## Sources de données
 
-Pour des raisons de performance et de limitations liées à l’hébergement (Render), l’interface front-end consomme un fichier `data.json` statique généré à partir de la base de données.
+Pour des raisons de performance et de limitations liées à l’hébergement ("cold start" de Render et page Github), l’interface front-end consomme un fichier `data.json` statique généré à partir de la base de données.
 
+## Améliorations possibles
+
+- Améliorer l'interface Admin pour un CRUD complet (édition, suppression, mise à jour de randonnées)
+- Ajouter une pagination pour le listing
+- Migrer l'API vers un autre hébergeur plus rapide (ex: Railway) pour utiliser les requêtes dynamiques vers l'API
+- Implémenter un système de commentaires ou d’avis sur les randonnées
 
 ---
 
@@ -31,4 +37,3 @@ Pour des raisons de performance et de limitations liées à l’hébergement (Re
 - Cloudinary (gestion et optimisation d’images)
 - Node.js (backend – API REST)
 - Render (hébergement backend)
-- 
